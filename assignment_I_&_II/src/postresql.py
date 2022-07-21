@@ -1,6 +1,4 @@
 from src.config import PostgresConfig
-import urllib.request
-import os
 import pandas as pd
 from sqlalchemy import create_engine
 from src.constants import Constants

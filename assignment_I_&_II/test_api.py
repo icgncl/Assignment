@@ -1,11 +1,7 @@
 from app import client
-import json
 from starlette.testclient import TestClient
 from src.constants import Constants
-import base64
 from requests.auth import HTTPBasicAuth
-from pydantic_model import InputData
-import pytest
 from src.postresql import Postgres
 import pandas as pd
 
