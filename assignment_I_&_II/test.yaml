@@ -1,0 +1,8 @@
+tables:
+  - name: dummy
+    schema: public
+    columns:
+      - name: dummydata
+        type: varchar
+      - name: dummydata2
+        type: varchar
