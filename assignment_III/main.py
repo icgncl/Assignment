@@ -18,7 +18,11 @@ class Company(BaseModel):
     def split_str(cls, v):
         if isinstance(v, str):
             v = v.strip()
-        if isinstance(v, int) or (v[0] in ('-', '+') and v[1:].isdigit()) or v.isdigit():
+            try:
+                v = int(v)
+            except:
+                return v
+        if isinstance(v, int):
             if int(v) < 10 and int(v) > 0:
                 return VALUE_1
             elif int(v) < 100 and int(v) > 9:
