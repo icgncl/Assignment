@@ -20,7 +20,7 @@ class Postgres:
         try:
             for query in Postgres.create_table_query(table_path):
                 self._conn.execute(query)
-                print("Tables are created!")
+            print("Tables are created!")
 
             # Insert dump data to credentials table
             self._conn.execute(f"INSERT INTO credentials (username, password) VALUES ('icgencel', 'icgencel123')")
