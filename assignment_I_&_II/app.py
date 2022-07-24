@@ -22,13 +22,11 @@ db = Postgres()
 
 
 def get_credentials(credentials: HTTPBasicCredentials = Depends(security)):
-    df = db.get_data(f"SELECT password FROM credentials WHERE username = '{credentials.username}'")
-    if df.empty:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Username not registered!",
-        )
-    if credentials.password != df['password'].values[0]:
+    try:
+        password = db.run_query_cred(f"SELECT password FROM credentials WHERE username = :username", {'username':credentials.username}).fetchall()[0][0]
+    except:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Username not found!")
+    if credentials.password != password:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect credentials!",
