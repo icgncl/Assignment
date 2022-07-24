@@ -1,8 +1,8 @@
 from src.config import PostgresConfig
 import pandas as pd
 from sqlalchemy import create_engine
-from src.constants import Constants
 import yaml
+from sqlalchemy.sql import text
 
 class Postgres:
     def __init__(self):
@@ -38,6 +38,9 @@ class Postgres:
 
     def run_query(self, query):
         self._conn.execute(query)
+
+    def run_query_cred(self, query, param):
+        return self._conn.execute(text(query), param)
 
     def insert_prediction(self, prediction_table, predictions):
         predictions.to_sql(f'{prediction_table}', self._conn, if_exists='replace', index=False)
